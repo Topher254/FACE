@@ -5,6 +5,10 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 720 ) #set width
 cap.set(4, 360) #height
 
+classNames = [
+    "Person", "chair", "staircase", "water", "pit"
+]
+
 # create model
 model = YOLO('yolov8n.pt')
 
@@ -28,6 +32,16 @@ while True:
             # lets create a rectangle bounded by this cordinates
             # cv2.rectangle(img,((x1,y1)),(0,255,0),3)
             cv2.rectangle(img,(a,b),(c,d),(0,255,0),3)
+
+            # percentage confidence values
+            conf = box.conf[0]
+            # convert the tensor confidence value to integer
+            # conf = int(conf)
+            print("confidence value is : ",conf)
+
+            # classes
+            cls = box.cls[0]
+            print("class is : ", cls)
     cv2.imshow("image",img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

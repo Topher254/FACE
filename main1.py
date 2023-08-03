@@ -54,22 +54,32 @@ while True:
             class_2 = 'Car'
             class_56 = 'Chair'
 
+            # BACKGROUND OF TEXT
+            # not working
+            rect_bgr = (77,26,120)
+            # cv2.rectangle(img,(a,a+20),(b,b+20),(255,0,0),3)
+
             print("Class",class_id)
             print("confidence",confidence)
             print("-----")
-
+             
+            text_color = (255,0,255)
             if class_id == 0:
-                cv2.putText(img,f"{class_0}..{confidence_display}",(a,b),font,2,(0,255,0),3)
+                texta = f"{class_0}_{confidence_display}"
+                cv2.putText(img,texta,(a,b),font,2,text_color,3)
                 engine.say("Person detected")
                 engine.runAndWait()
             if class_id == 1:
+                texta = f"{class_1}_{confidence_display}"
                 engine.say("Bicycle detected")
                 engine.runAndWait()
 
             if class_id == 3:
+                texta = f"{class_2}_{confidence_display}"
                 engine.say("Vehicle detected")
                 engine.runAndWait()
             if class_id == 56:
+                texta = f"{class_56}_{confidence_display}"
                 engine.say("Chair detected")
                 engine.runAndWait()
 

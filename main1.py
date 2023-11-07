@@ -11,11 +11,13 @@ cap.set(3, 720 ) #set width
 cap.set(4, 360) #height
 
 classNames = [
-    "Person", "chair", "staircase", "water", "pit"
+    "Person", "chair", "staircase", "water", "pit","cell_phone", 'TV'
+'Laptop','Cow','dog', 'cat'
 ]
 
 # create model
-model = YOLO('yolov8n.pt')
+model = YOLO('yolov8l.pt')
+
 
 while True:
     success, img = cap.read()
@@ -53,6 +55,12 @@ while True:
             class_1 = 'Bicyle'
             class_2 = 'Car'
             class_56 = 'Chair'
+            class_67 = 'cell_phone'
+            class_62 = 'TV'
+            class_63 = 'Laptop'
+            class_19 = 'Cow'
+            class_16 = 'dog'
+            class_15 = 'cat'
 
             # BACKGROUND OF TEXT
             # not working
@@ -81,9 +89,38 @@ while True:
             if class_id == 56:
                 texta = f"{class_56}_{confidence_display}"
                 engine.say("Chair detected")
+
+            if class_id == 67:
+                texta = f"{class_0}_{confidence_display}"
+                cv2.putText(img,texta,(a,b),font,2,text_color,3)
+                engine.say("Cell phone detected")
+                engine.runAndWait()
+            if class_id == 62:
+                texta = f"{class_1}_{confidence_display}"
+                engine.say("Television detected")
                 engine.runAndWait()
 
+            if class_id == 63:
+                texta = f"{class_2}_{confidence_display}"
+                engine.say("Laptop detected")
+                engine.runAndWait()
+            if class_id == 19:
+                texta = f"{class_56}_{confidence_display}"
+                engine.say("Cow detected")
+                engine.runAndWait()
+            if class_id == 16:
+                texta = f"{class_0}_{confidence_display}"
+                engine.say("Dog detected")
+                engine.runAndWait()
+            if class_id == 15:
+                texta = f"{class_1}_{confidence_display}"
+                engine.say("CAT detected")
+                engine.runAndWait()
+        cv2.putText(img,texta,(a,b),font,2,text_color,3)
 
+    print("Class",class_id)
+    print("confidence",confidence)
+    print("-----")
 
     cv2.imshow("image",img)
     cv2.waitKey(0)
